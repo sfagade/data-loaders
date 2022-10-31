@@ -1,15 +1,9 @@
 import os
 
 import psycopg2
-from dotenv import load_dotenv
-from configuration import init_logger
 
 
-load_dotenv()
-log = init_logger("POSTGRES CONNECT")
-
-
-def connect_to_postgres():
+def connect_to_postgres(log):
     conn = psycopg2.connect(database=os.environ.get("POSTGRES_DB"),
                             host=os.environ.get("POSTGRES_HOST"),
                             user=os.environ.get("POSTGRES_USER"),
@@ -27,6 +21,14 @@ def connect_to_postgres():
     return conn
 
 
-def close_postgres_connection(conn):
+def close_postgres_connection(conn, log):
     log.debug("Closing postgres connection")
     conn.close()
+
+
+def connect_to_mongo(log):
+    pass
+
+
+def close_mongo_connection(log):
+    pass
